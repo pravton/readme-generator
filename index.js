@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+const fs = require('fs');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -46,6 +47,14 @@ const questions = [
         type: 'input',
         name: 'aboutInstallation',
         message: 'Provide some information about installation:',
+        validate: installationInput => {
+            if(installationInput) {
+                return true;
+            } else {
+                console.log('Please enter about Installation!')
+                return false;
+            }
+        },
         when: ({confirmInstallation}) => {
             if (confirmInstallation) {
                 return true;
@@ -65,6 +74,14 @@ const questions = [
         type: 'input',
         name: 'aboutUsage',
         message: 'Provide some information about usage:',
+        validate: usageInput => {
+            if(usageInput) {
+                return true;
+            } else {
+                console.log('Please enter about Usage!')
+                return false;
+            }
+        },
         when: ({confirmUsage}) => {
             if (confirmUsage) {
                 return true;
@@ -135,6 +152,14 @@ const questions = [
         type: 'input',
         name: 'aboutContributor',
         message: 'Provide some information about contributors:',
+        validate: contributorInput => {
+            if(contributorInput) {
+                return true;
+            } else {
+                console.log('Please enter about contributors!')
+                return false;
+            }
+        },
         when: ({confirmContributor}) => {
             if (confirmContributor) {
                 return true;
@@ -154,6 +179,14 @@ const questions = [
         type: 'input',
         name: 'aboutTests',
         message: 'Provide some information about tests:',
+        validate: testsInput => {
+            if(testsInput) {
+                return true;
+            } else {
+                console.log('Please enter about tests!')
+                return false;
+            }
+        },
         when: ({confirmTests}) => {
             if (confirmTests) {
                 return true;
@@ -193,7 +226,7 @@ const questions = [
     {
         type: 'input',
         name: 'githubUsername',
-        message: 'What is your email address?',
+        message: 'What is your github Username?',
         validate: githubInput => {
             if(githubInput) {
                 return true;
@@ -214,7 +247,14 @@ const questions = [
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile('./dist/' + fileName + '.md', data, err => {
+        if (err) {
+            reject(err);
+            return;
+        }
+    });
+}
 
 // TODO: Create a function to initialize app
 function init() {
@@ -226,4 +266,8 @@ function init() {
 init()
     .then(answers => {
         console.log(answers);
+        return generateMarkdown(answers);
+    })
+    .then(content => {
+        return writeToFile('README', content)  
     });
