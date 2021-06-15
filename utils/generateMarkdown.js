@@ -2,7 +2,7 @@
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   if(license) {
-    return 'https://img.shields.io/badge/licence-' + license.replace('-', '	%20') + '-green';
+    return '![badge](https://img.shields.io/badge/licence-' + license.replace('-', '	%20') + '-green)';
   } else {
     console.log('No license provided');
     return '';
@@ -24,12 +24,13 @@ function renderLicenseLink(license) {
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
   if(license) {
-    return 'This application is covered under the ['+ license +'] (' + renderLicenseLink(license) + ') license.'
+    return 'This application is covered under the ['+ license +'](' + renderLicenseLink(license) + ') license.'
   }
 }
 
 // Function to generate the table of contents
 function tableOfContent(data) {
+  let usedTools = '';
   let installation = '';
   let usage = '';
   let license = '';
@@ -37,47 +38,65 @@ function tableOfContent(data) {
   let tests = '';
   let questions = '';
 
+  if(data.usedLanguagesTools) {
+    usedTools = '- [Used Tools and Languages](#Used-tools-and-languages)';
+  }
+
   if(data.confirmInstallation) {
-    installation = '- [Installation](#installation)';
+    installation = '- [Installation](#%EF%B8%8F-installation)';
   } 
   
   if(data.confirmUsage) {
-    usage = '- [Usage](#usage)';
+    usage = '- [Usage](#%EF%B8%8F-usage)';
   }
   
   if(data.confirmLicense) {
-    license = '- [License](#license)';
+    license = '- [License](#-license)';
   }
   
   if(data.confirmContributor) {
-    contributor = '- [Contributing](#contributing)';
+    contributor = '- [Contributing](#-contributor)';
   }
   
   if(data.confirmTests) {
-    tests = '- [Tests](#tests)';
+    tests = '- [Tests](#-tests)';
   }
 
   if(data.confirmQuestions) {
-    questions = '- [Questions](#questions)';
+    questions = '- [Questions](#-questions)';
   }
 
   return `
-  ${installation}
-  ${usage}
-  ${license}
-  ${contributor}
-  ${tests}
-  ${questions}
+${installation}
+${usage}
+${license}
+${contributor}
+${tests}
+${questions}
   `
 };
+
+function genToolsLanguagesSec(data) {
+  if(data.usedLanguagesTools) {
+    let langArray = data.usedLanguagesTools;
+    let languagesTools = '';
+    for(let i = 0; i < langArray.length; i++) {
+      languagesTools += '![badge](https://img.shields.io/badge/-' + langArray[i] + '-orange) ';
+    }
+
+    return `
+    ${languagesTools}
+    `
+  }
+}
 
 // Function to generate the installation section
 function genInstallationSec(data) {
   if(data.confirmInstallation) {
     return `
-    ## ⚙️ Installation
+## ⚙️ Installation
 
-    ${data.aboutInstallation}
+${data.aboutInstallation}
     `
   } else {
     return '';
@@ -88,9 +107,9 @@ function genInstallationSec(data) {
 function genUsageSec(data) {
   if(data.confirmUsage) {
     return `
-    ## 🖥️ Usage
+## 🖥️ Usage
 
-    ${data.aboutUsage}
+${data.aboutUsage}
     `
   } else {
     return '';
@@ -101,9 +120,9 @@ function genUsageSec(data) {
 function genLisenceSec(data) {
   if(data.confirmLicense) {
     return `
-    ## 📝 License
+## 📝 License
 
-    ${renderLicenseSection(data.license)}
+${renderLicenseSection(data.license)}
     `
   } else {
     return '';
@@ -114,9 +133,9 @@ function genLisenceSec(data) {
 function genContributorSec(data) {
   if(data.confirmContributor) {
     return `
-    ## 🧑‍🎨 Contributor
+## 🧑‍🎨 Contributor
 
-    ${renderLicenseSection(data.aboutContributor)}
+${data.aboutContributor}
     `
   } else {
     return '';
@@ -127,9 +146,9 @@ function genContributorSec(data) {
 function genTestSec(data) {
   if(data.confirmTests) {
     return `
-    ## 🧪 Tests
+## 🧪 Tests
 
-    ${data.aboutTests}
+${data.aboutTests}
     `
   } else {
     return '';
@@ -140,12 +159,12 @@ function genTestSec(data) {
 function genQuestionSec(data) {
   if(data.confirmQuestions) {
     return `
-    ## ❓ Questions
+## ❓ Questions
 
-    If you have any questions regarding this application, please reach out via email or github!
+If you have any questions regarding this application, please reach out via email or github!
 
-    📧 Email : ${data.email}
-    🤖 GitHub : ${data.githubUsername}
+📧 Email : ${data.email}
+🤖 GitHub : https://github.com/${data.githubUsername}
 
     `
   } else {
@@ -155,29 +174,28 @@ function genQuestionSec(data) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.projectName}
+  return `
+# ${data.projectName}
+${renderLicenseBadge(data.license)} ${genToolsLanguagesSec(data)}
 
-  ![badge](${renderLicenseBadge(data.license)})
+## 📜 Description
+${data.description}
 
-  ## 📜 Description
+## 📋 Table Of Contents
+${tableOfContent(data)}
 
-  ${data.description}
+${genInstallationSec(data)}
 
-  ## 📋 Table Of Contents
+${genUsageSec(data)}
 
-  ${tableOfContent(data)}
+${genLisenceSec(data)}
 
-  ${genInstallationSec(data)}
+${genContributorSec(data)}
 
-  ${genUsageSec(data)}
+${genTestSec(data)}
 
-  ${genLisenceSec(data)}
+${genQuestionSec(data)}
 
-  ${genContributorSec(data)}
-
-  ${genTestSec(data)}
-
-  ${genQuestionSec(data)}
 `;
 }
 

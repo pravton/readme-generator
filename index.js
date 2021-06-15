@@ -33,9 +33,20 @@ const questions = [
     },
     {
         type: 'checkbox',
-        name: 'tableOfContents',
-        message: 'Select your table of contents',
-        choices: ['Installation', 'Usage', 'Credits', 'License']
+        name: 'usedLanguagesTools',
+        message: 'Select the languages/tools used in the project',
+        choices: [
+            'HTML',
+            'CSS', 
+            'Javascript', 
+            'Java', 
+            'Python', 
+            'Ruby', 
+            'Node.js', 
+            'React', 
+            'jQuery', 
+            'AngularJS',
+        ]
     }, 
     {
         type: 'confirm',
@@ -145,13 +156,13 @@ const questions = [
     {
         type: 'confirm',
         name: 'confirmContributor',
-        message: 'Would you like to enter some information about contributos?',
+        message: 'Would you like to enter some information about contributors?',
         default: false
     },
     {
         type: 'input',
         name: 'aboutContributor',
-        message: 'Provide some information about contributors:',
+        message: 'Please enter the contributors names:',
         validate: contributorInput => {
             if(contributorInput) {
                 return true;
