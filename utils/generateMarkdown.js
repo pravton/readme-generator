@@ -30,17 +30,12 @@ function renderLicenseSection(license) {
 
 // Function to generate the table of contents
 function tableOfContent(data) {
-  let usedTools = '';
   let installation = '';
   let usage = '';
   let license = '';
-  let contributor = '';
+  let contributing = '';
   let tests = '';
   let questions = '';
-
-  if(data.usedLanguagesTools) {
-    builtWith = '- [Built With](#built-with)';
-  }
 
   if(data.confirmInstallation) {
     installation = '- [Installation](#%EF%B8%8F-installation)';
@@ -54,8 +49,8 @@ function tableOfContent(data) {
     license = '- [License](#-license)';
   }
   
-  if(data.confirmContributor) {
-    contributor = '- [Contributing](#-contributor)';
+  if(data.confirmContributing) {
+    contributing = '- [Contributing](#-contributing)';
   }
   
   if(data.confirmTests) {
@@ -67,11 +62,10 @@ function tableOfContent(data) {
   }
 
   return `
-${builtWith} 
 ${installation}
 ${usage}
 ${license}
-${contributor}
+${contributing}
 ${tests}
 ${questions}
   `
@@ -82,37 +76,61 @@ function genToolsLanguagesSec(data) {
     let langArray = data.usedLanguagesTools;
     let languagesTools = '';
     for(let i = 0; i < langArray.length; i++) {
-      languagesTools += '![badge](https://img.shields.io/badge/-' + langArray[i] + '-orange) ';
+      languagesTools += '![badge](https://img.shields.io/badge/-' + langArray[i] + '-red) ';
     }
 
-    return `
-    ${languagesTools}
-    `
+    return `${languagesTools}`
   }
 }
 
 // Function to generate the installation section
 function genInstallationSec(data) {
+  // confirm to see if the installation command exist.
+  let confirmInstallationCommands = '';
+
   if(data.confirmInstallation) {
+    if(data.aboutInstallationCommands) {
+       confirmInstallationCommands = `
+\`\`\`
+${data.aboutInstallationCommands}
+\`\`\`
+`
+    } 
+
+
     return `
 ## ⚙️ Installation
 
 ${data.aboutInstallation}
+${confirmInstallationCommands}
 `
   } else {
+    console.log('No installation details provided!');
       return '';
     }
-  };
+};
 
 // Function to create the usage section
 function genUsageSec(data) {
   if(data.confirmUsage) {
+// confirm to see if the installation command exist.
+  let usageCommands = '';
+  if(data.aboutUsageCommands) {
+    usageCommands = `
+\`\`\`
+${data.aboutUsageCommands}
+\`\`\`
+`
+    } 
+
     return `
 ## 🖥️ Usage
 
 ${data.aboutUsage}
+${usageCommands}
 `
   } else {
+    console.log('No usage details provided!');
     return '';
   }
 };
@@ -130,20 +148,21 @@ ${renderLicenseSection(data.license)}
   }
 };
 
-// Function to create the contributor section
-function genContributorSec(data) {
-  if(data.confirmContributor) {
+// Function to create the contributing section
+function genContributingSec(data) {
+  if(data.confirmContributing) {
     return `
-## 🧑‍🎨 Contributor
+## 🤝 Contributing
 
-${data.aboutContributor}
+${data.aboutContributing}
 `
   } else {
+    console.log('No contributing details provided!');
     return '';
   }
 };
 
-// Function to create the contributor section
+// Function to create the Test section
 function genTestSec(data) {
   if(data.confirmTests) {
     return `
@@ -152,6 +171,7 @@ function genTestSec(data) {
 ${data.aboutTests}
 `
   } else {
+    console.log('No test details provided!');
     return '';
   }
 };
@@ -169,13 +189,13 @@ If you have any questions regarding this application, please reach out via email
 🤖 GitHub : https://github.com/${data.githubUsername}
 `
   } else {
+    console.log('No contact details provided!');
     return '';
   }
 };
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  console.log(data.usedLanguagesTools);
   return `
 # ${data.projectName}
 ${renderLicenseBadge(data.license)} ${genToolsLanguagesSec(data)}
@@ -185,19 +205,12 @@ ${data.description}
 
 ## 📋 Table Of Contents
 ${tableOfContent(data)}
-
 ${genInstallationSec(data)}
-
 ${genUsageSec(data)}
-
 ${genLisenceSec(data)}
-
-${genContributorSec(data)}
-
+${genContributingSec(data)}
 ${genTestSec(data)}
-
 ${genQuestionSec(data)}
-
 `
 }
 

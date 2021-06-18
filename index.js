@@ -5,6 +5,7 @@ const fs = require('fs');
 
 // TODO: Create an array of questions for user input
 const questions = [
+    // Project Name 
     {
         type: 'input',
         name: 'projectName',
@@ -18,6 +19,7 @@ const questions = [
             }
         }
     },
+    // Project Description 
     {
         type: 'input',
         name: 'description',
@@ -31,6 +33,7 @@ const questions = [
             }
         }
     },
+    // Used Languages and Tools 
     {
         type: 'checkbox',
         name: 'usedLanguagesTools',
@@ -48,11 +51,12 @@ const questions = [
             'AngularJS',
         ]
     }, 
+    // Installation Instructions
     {
         type: 'confirm',
         name: 'confirmInstallation',
         message: 'Would you like to enter some information about installation?',
-        default: false
+        default: true
     },
     {
         type: 'input',
@@ -75,16 +79,45 @@ const questions = [
         }
 
     },
+    // Installation Commands 
+    {
+        type: 'confirm',
+        name: 'confirmInstallationCommands',
+        message: 'Would you like to add any commands for installation?',
+        default: true
+    },
+    {
+        type: 'input',
+        name: 'aboutInstallationCommands',
+        message: 'Provide enter the command for the installation:',
+        validate: installationCommandInput => {
+            if(installationCommandInput) {
+                return true;
+            } else {
+                console.log('Please enter commands about the Installation!')
+                return false;
+            }
+        },
+        when: ({confirmInstallationCommands}) => {
+            if (confirmInstallationCommands) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    },
+    // Usage Instructions
     {
         type: 'confirm',
         name: 'confirmUsage',
         message: 'Would you like to enter some information about usage?',
-        default: false
+        default: true
     },
     {
         type: 'input',
         name: 'aboutUsage',
-        message: 'Provide some information about usage:',
+        message: 'Please provide some information about usage:',
         validate: usageInput => {
             if(usageInput) {
                 return true;
@@ -102,11 +135,40 @@ const questions = [
         }
 
     },
+    // Usage Commands
+    {
+        type: 'confirm',
+        name: 'confirmUsageCommands',
+        message: 'Would you like to add any commands for usage?',
+        default: true
+    },
+    {
+        type: 'input',
+        name: 'aboutUsageCommands',
+        message: 'Provide enter the command for the usage:',
+        validate: usageCommandInput => {
+            if(usageCommandInput) {
+                return true;
+            } else {
+                console.log('Please enter commands about the Usage!')
+                return false;
+            }
+        },
+        when: ({confirmUsageCommands}) => {
+            if (confirmUsageCommands) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    },
+    // License Selection
     {
         type: 'confirm',
         name: 'confirmLicense',
         message: 'Would you like to include a license?',
-        default: false
+        default: true
     },
     {
         type: 'list',
@@ -153,26 +215,20 @@ const questions = [
         }
 
     },
+    // Contributing Instructions
     {
         type: 'confirm',
-        name: 'confirmContributor',
-        message: 'Would you like to enter some information about contributors?',
-        default: false
+        name: 'confirmContributing',
+        message: 'Would you like to enter some information about contributing?',
+        default: true
     },
     {
         type: 'input',
-        name: 'aboutContributor',
-        message: 'Please enter the contributors names:',
-        validate: contributorInput => {
-            if(contributorInput) {
-                return true;
-            } else {
-                console.log('Please enter about contributors!')
-                return false;
-            }
-        },
-        when: ({confirmContributor}) => {
-            if (confirmContributor) {
+        name: 'aboutContributing',
+        message: 'Please enter details about contributing:',
+        default: 'Contributions, issues and feature requests are welcome. Feel free to check issues page if you want to contribute.',
+        when: ({confirmContributing}) => {
+            if (confirmContributing) {
                 return true;
             } else {
                 return false;
@@ -180,6 +236,7 @@ const questions = [
         }
 
     },
+    // Tests Instructions
     {
         type: 'confirm',
         name: 'confirmTests',
@@ -207,6 +264,7 @@ const questions = [
         }
 
     },
+    // Questions and Contact Information
     {
         type: 'confirm',
         name: 'confirmQuestions',
@@ -281,4 +339,7 @@ init()
     })
     .then(content => {
         return writeToFile('README', content)  
+    })
+    .catch(err => {
+        console.log(err);
     });
