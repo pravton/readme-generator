@@ -2,7 +2,7 @@
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   if(license) {
-    return '![badge](https://img.shields.io/badge/licence-' + license.replace('-', '	%20') + '-green)';
+    return '![badge](https://img.shields.io/badge/licence-' + license.replace('-', '%20') + '-green)';
   } else {
     console.log('No license provided');
     return '';
@@ -39,7 +39,7 @@ function tableOfContent(data) {
   let questions = '';
 
   if(data.usedLanguagesTools) {
-    usedTools = '- [Used Tools and Languages](#Used-tools-and-languages)';
+    builtWith = '- [Built With](#built-with)';
   }
 
   if(data.confirmInstallation) {
@@ -67,6 +67,7 @@ function tableOfContent(data) {
   }
 
   return `
+${builtWith} 
 ${installation}
 ${usage}
 ${license}
@@ -97,11 +98,11 @@ function genInstallationSec(data) {
 ## ⚙️ Installation
 
 ${data.aboutInstallation}
-    `
+`
   } else {
-    return '';
-  }
-};
+      return '';
+    }
+  };
 
 // Function to create the usage section
 function genUsageSec(data) {
@@ -110,7 +111,7 @@ function genUsageSec(data) {
 ## 🖥️ Usage
 
 ${data.aboutUsage}
-    `
+`
   } else {
     return '';
   }
@@ -123,7 +124,7 @@ function genLisenceSec(data) {
 ## 📝 License
 
 ${renderLicenseSection(data.license)}
-    `
+`
   } else {
     return '';
   }
@@ -136,7 +137,7 @@ function genContributorSec(data) {
 ## 🧑‍🎨 Contributor
 
 ${data.aboutContributor}
-    `
+`
   } else {
     return '';
   }
@@ -149,7 +150,7 @@ function genTestSec(data) {
 ## 🧪 Tests
 
 ${data.aboutTests}
-    `
+`
   } else {
     return '';
   }
@@ -164,9 +165,9 @@ function genQuestionSec(data) {
 If you have any questions regarding this application, please reach out via email or github!
 
 📧 Email : ${data.email}
-🤖 GitHub : https://github.com/${data.githubUsername}
 
-    `
+🤖 GitHub : https://github.com/${data.githubUsername}
+`
   } else {
     return '';
   }
@@ -174,6 +175,7 @@ If you have any questions regarding this application, please reach out via email
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+  console.log(data.usedLanguagesTools);
   return `
 # ${data.projectName}
 ${renderLicenseBadge(data.license)} ${genToolsLanguagesSec(data)}
@@ -196,7 +198,7 @@ ${genTestSec(data)}
 
 ${genQuestionSec(data)}
 
-`;
+`
 }
 
 module.exports = generateMarkdown;
