@@ -322,6 +322,14 @@ function writeToFile(fileName, data) {
             reject(err);
             return;
         }
+
+        console.log(`
+
+╔═╗╦ ╦╔═╗╔═╗╔═╗╔═╗╔═╗┬
+╚═╗║ ║║  ║  ║╣ ╚═╗╚═╗│
+╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝o
+
+A README.md has been successfully generated. Please check the dist folder for the output!`)
     });
 }
 
@@ -334,7 +342,6 @@ function init() {
 // Function call to initialize app
 init()
     .then(answers => {
-        console.log(answers);
         return generateMarkdown(answers);
     })
     .then(content => {

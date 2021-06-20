@@ -1,6 +1,6 @@
 
-# READEME Generator Sample
-![badge](https://img.shields.io/badge/licence-MPL%202.0-green) ![badge](https://img.shields.io/badge/-Javascript-red) ![badge](https://img.shields.io/badge/-Node.js-red) 
+# Readme Generator
+![badge](https://img.shields.io/badge/licence-MIT-green) ![badge](https://img.shields.io/badge/-Javascript-red) ![badge](https://img.shields.io/badge/-Node.js-red) 
 
 ## 📜 Description
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -27,13 +27,17 @@ npm install
 
 ## 🖥️ Usage
 
-You can generate the readme generator by running the following commands 
+You can use the readme generator by running the following command
+
+```
+node index
+```
 
 
 
 ## 📝 License
 
-This application is covered under the [MPL-2.0](https://choosealicense.com/licenses/mpl-2.0/) license.
+This application is covered under the [MIT](https://choosealicense.com/licenses/mit/) license.
 
 
 ## 🤝 Contributing
