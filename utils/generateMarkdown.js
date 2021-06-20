@@ -69,7 +69,7 @@ ${contributing}
 ${tests}
 ${questions}
   `
-};
+}
 
 function genToolsLanguagesSec(data) {
   if(data.usedLanguagesTools) {
@@ -108,7 +108,7 @@ ${confirmInstallationCommands}
     console.log('No installation details provided!');
       return '';
     }
-};
+}
 
 // Function to create the usage section
 function genUsageSec(data) {
@@ -133,7 +133,7 @@ ${usageCommands}
     console.log('No usage details provided!');
     return '';
   }
-};
+}
 
 // Function to create the lisence section
 function genLisenceSec(data) {
@@ -146,7 +146,7 @@ ${renderLicenseSection(data.license)}
   } else {
     return '';
   }
-};
+}
 
 // Function to create the contributing section
 function genContributingSec(data) {
@@ -160,7 +160,7 @@ ${data.aboutContributing}
     console.log('No contributing details provided!');
     return '';
   }
-};
+}
 
 // Function to create the Test section
 function genTestSec(data) {
@@ -174,7 +174,7 @@ ${data.aboutTests}
     console.log('No test details provided!');
     return '';
   }
-};
+}
 
 // Function to create the questions section
 function genQuestionSec(data) {
@@ -192,7 +192,7 @@ If you have any questions regarding this application, please reach out via email
     console.log('No contact details provided!');
     return '';
   }
-};
+}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
