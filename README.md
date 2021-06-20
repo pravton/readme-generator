@@ -1,5 +1,5 @@
 # Readme Generator
-![badge](https://img.shields.io/badge/licence-MPL%202.0-green) ![badge](https://img.shields.io/badge/-Javascript-red) ![badge](https://img.shields.io/badge/-Node.js-red) 
+![badge](https://img.shields.io/badge/licence-MIT-green) ![badge](https://img.shields.io/badge/-Javascript-red) ![badge](https://img.shields.io/badge/-Node.js-red) 
 
 ## 📜 Description
 A command-line application that dynamically generates a professional README.md file from a user's input using the Inquirer package.
@@ -43,7 +43,7 @@ node index.js
 
 ## 📝 License
 
-This application is covered under the [MPL-2.0](https://choosealicense.com/licenses/mpl-2.0/) license.
+This application is covered under the [MIT](https://choosealicense.com/licenses/mit/) license.
 
 
 ## 🤝 Contributing
