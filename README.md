@@ -38,7 +38,7 @@ node index.js
 
 ## Final Output GIF
 
-![Final Output](./assets/images/final-output.gif "Final output of the project")
+![Final Output](./src/final-output.gif "Final output of the project")
 
 
 ## 📝 License
