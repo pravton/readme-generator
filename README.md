@@ -9,6 +9,7 @@ A command-line application that dynamically generates a professional README.md f
 - [Installation](#%EF%B8%8F-installation)
 - [Usage](#%EF%B8%8F-usage)
 - [Walkthrough Video](#%EF%B8%8F-walkthrough-video)
+- [Final Output GIF](#%EF%B8%8F-final-output-gif)
 - [License](#-license)
 - [Contributing](#-contributing)
 - [Tests](#-tests)
@@ -36,7 +37,7 @@ node index.js
 
 [**Click Here**](https://www.youtube.com/watch?v=DD4vSAQM4Mg) to view the walkthrough video.
 
-## Final Output GIF
+## ▶️ Final Output GIF
 
 ![Final Output](./src/final-output.gif "Final output of the project")
 
